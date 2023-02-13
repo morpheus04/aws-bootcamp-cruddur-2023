@@ -3,7 +3,7 @@
         "Amount": "100",
         "Unit": "USD"
     },
-    "BudgetName": "Example Tag Budget",
+    "BudgetName": "Cloud-BootCamp-Budget",
     "BudgetType": "COST",
     "CostFilters": {
         "TagKeyValue": [
