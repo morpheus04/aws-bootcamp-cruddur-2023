@@ -8,6 +8,8 @@
       - [Create a Budget](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#create-a-budget)
       - [Create a Billing Alarm](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#create-a-billing-alarm)
 + [Homework Challenges](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#homework-challenges)
+  - [Budgets & Billing Alarm](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#budgets--billing-alarm-1)
+      - [Create a Budget](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#create-a-budget-1)
 
 
 ## Required Homework (Instructional Homework)
@@ -35,11 +37,9 @@ The main budget (set to $100) for the account was created to include all AWS res
 
 ![image](https://user-images.githubusercontent.com/37842433/219105210-78e592f5-fd9d-4e41-950d-45bac18c05ed.png)
 
-![image](https://user-images.githubusercontent.com/37842433/219121541-70c05e71-f95f-45c5-8740-ea0bb65c6858.png)
+An extract of the code as referenced in my repo
 
-An extract of the code showing the creation of 4 threshold alerts (20% - 80%) as referenced in my repo
-
-[main/aws/json/budget-notifications-with-subscribers.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/budget-notifications-with-subscribers.json)
+[main/aws/json/budget.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/budget.json)
 
 ***
 
@@ -54,4 +54,20 @@ The Credits budget was created to use just the "Credits" parameter. The budget w
 
 #### <ins>Create a Billing Alarm</ins>
 
+
+
 ## Homework Challenges
+
+### Budgets & Billing Alarm
+
+#### <ins>Create a Budget</ins>
+
+- *Cloud-BootCamp-Budget*
+
+I created threshold alerts created dependent on the % of actual spend vs set amount. This can be seen in the diagrams below
+
+![image](https://user-images.githubusercontent.com/37842433/219121541-70c05e71-f95f-45c5-8740-ea0bb65c6858.png)
+
+An extract of the code showing the creation of 4 threshold alerts (20% - 80%) as referenced in my repo
+
+[main/aws/json/budget-notifications-with-subscribers.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/budget-notifications-with-subscribers.json)
