@@ -5,6 +5,8 @@
 + [Required Homework](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#required-homework-instructional-homework)
   - [Lucid Diagrams](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#lucid-diagrams)
   - [Budgets & Billing Alarm](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#budgets--billing-alarm)
+      - [Create a Budget](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#create-a-budget)
+      - [Create a Billing Alarm](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#create-a-billing-alarm)
 + [Homework Challenges](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#homework-challenges)
 
 
