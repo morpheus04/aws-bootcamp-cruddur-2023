@@ -2,10 +2,10 @@
 
 #### Table of Contents
 
-+ [Required Homework](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/edit/week-0/journal/week0.md#required-homework-instructional-homework)
-  - [Lucid Diagrams](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/edit/week-0/journal/week0.md#lucid-diagrams)
-  - [Budgets & Billing Alarm](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/edit/week-0/journal/week0.md#budgets--billing-alarm)
-+ [Homework Challenges](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/edit/week-0/journal/week0.md#homework-challenges)
++ [Required Homework](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#required-homework-instructional-homework)
+  - [Lucid Diagrams](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#lucid-diagrams)
+  - [Budgets & Billing Alarm](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#budgets--billing-alarm)
++ [Homework Challenges](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#homework-challenges)
 
 
 ## Required Homework (Instructional Homework)
@@ -29,9 +29,11 @@ The task was to budget for all resources and credits spend. So I created 2 budge
 
 - *Cloud-BootCamp-Budget*
 
-The main budget (set to $100) for the account was created to include all AWS resource monthly spend and threshold alerts created dependent on the % of actual spend vs set amount. This can be seen in the diagram below
+The main budget (set to $100) for the account was created to include all AWS resource monthly spend and threshold alerts created dependent on the % of actual spend vs set amount. This can be seen in the diagrams below
 
-![image](https://user-images.githubusercontent.com/37842433/219105210-78e592f5-fd9d-4e41-950d-45bac18c05ed.png)  
+![image](https://user-images.githubusercontent.com/37842433/219105210-78e592f5-fd9d-4e41-950d-45bac18c05ed.png)
+
+![image](https://user-images.githubusercontent.com/37842433/219121541-70c05e71-f95f-45c5-8740-ea0bb65c6858.png)
 
 An extract of the code showing the creation of 4 threshold alerts (20% - 80%) as referenced in my repo
 
