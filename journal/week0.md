@@ -54,7 +54,19 @@ The Credits budget was created to use just the "Credits" parameter. The budget w
 
 #### <ins>Create a Billing Alarm</ins>
 
+The task was to create daily billing alarm for all resource daily spend. The budget was set to a daily amount of $1. The *DailyEstimatedCharges* billing alarm was created via the AWS CLI (using gitpod) and resulted in a CloudWatch been created in AWS.
 
+As part of this process, AWS SNS was setup with an email (this was verified and confirmed as part of the setup). The alarm will send alerts (by subscription to a topic *billing-alarm*) using AWS SNS (Simple Notification Service) to an email address whenver the value is exceeded.
+
+This can be seen in the diagram below
+
+![image](https://user-images.githubusercontent.com/37842433/219127470-d332fb6b-4eeb-4473-9575-4217d1b36cce.png)
+
+An extract of the code showing the creation of the billing alarm as referenced in my repo
+
+[main/aws/json/alarm_config.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/alarm_config.json) 
+
+***
 
 ## Homework Challenges
 
@@ -71,3 +83,5 @@ I created threshold alerts created dependent on the % of actual spend vs set amo
 An extract of the code showing the creation of 4 threshold alerts (20% - 80%) as referenced in my repo
 
 [main/aws/json/budget-notifications-with-subscribers.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/budget-notifications-with-subscribers.json)
+
+---
