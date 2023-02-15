@@ -1,5 +1,5 @@
 # Week 0 — Billing and Architecture
 
-## Required Work (Instructional Homework)
+## Required Homework (Instructional Homework)
 
 ## Homework Challenges
