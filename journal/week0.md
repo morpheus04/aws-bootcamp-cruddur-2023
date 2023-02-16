@@ -10,11 +10,11 @@
 + [Homework Challenges](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#homework-challenges)
   - [Budgets & Billing Alarm](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#budgets--billing-alarm-1)
       - [Create a Budget](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#create-a-budget-1)
-  - [Destroy root account credentials](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#budgets--billing-alarm-1)
-  - [Set MFA](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#budgets--billing-alarm-1)
-  - [IAM role](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#budgets--billing-alarm-1)
-  - [EventBridge (Health Dashboard) & SNS Setup](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#budgets--billing-alarm-1)
-  - [Open a support ticket and request a service limit](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#budgets--billing-alarm-1)
+  - [Destroy root account credentials](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#destroy-root-account-credentials)
+  - [Set MFA](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#set-mfa)
+  - [IAM role](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#iam-role)
+  - [EventBridge (Health Dashboard) & SNS Setup](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#eventbridge-health-dashboard--sns-setup)
+  - [Open a support ticket and request a service limit](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#open-a-support-ticket-and-request-a-service-limit)
 
 ## Required Homework (Instructional Homework)
 
@@ -43,7 +43,7 @@ The main budget (set to $100) for the account was created to include all AWS res
 
 An extract of the code as referenced in my repo
 
-[main/aws/json/budget.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/budget.json)
+[budget.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/budget.json)
 
 ***
 
@@ -68,7 +68,7 @@ This can be seen in the diagram below
 
 An extract of the code showing the creation of the billing alarm as referenced in my repo
 
-[main/aws/json/alarm_config.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/alarm_config.json)
+[alarm_config.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/alarm_config.json)
 
 ***
 
@@ -86,7 +86,7 @@ I created threshold alerts created dependent on the % of actual spend vs set amo
 
 An extract of the code showing the creation of 4 threshold alerts (20% - 80%) as referenced in my repo
 
-[main/aws/json/budget-notifications-with-subscribers.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/budget-notifications-with-subscribers.json)
+[budget-notifications-with-subscribers.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/aws/json/budget-notifications-with-subscribers.json)
 
 ---
 
@@ -158,7 +158,7 @@ Attached policies / permissions to the created role
   
 - EventBridge (Health Dashboard)
 
-I created an EventBridge rule to get notified for AWS Health events in my account. The rule which can be seen below also generated a [main/_docs/assets/service-health-sns.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/main/_docs/assets/service-health-sns.json) file
+I created an EventBridge rule to get notified for AWS Health events in my account. The rule which can be seen below also generated a [service-health-sns.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/main/_docs/assets/service-health-sns.json) file
 
 
 ![image](https://user-images.githubusercontent.com/37842433/219377414-d9383afb-08fc-45a8-92ae-58a5d8c29ca3.png)
