@@ -160,7 +160,7 @@ Attached policies / permissions to the created role
   
 - EventBridge (Health Dashboard)
 
-I created an EventBridge rule to get notified for AWS Health events in my account. The rule which can be seen below also generated a [service-health-sns.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/main/_docs/assets/service-health-sns.json) file
+I created an EventBridge rule to get notified for AWS Health events in my account. The rule which can be seen below also generated a [service-health-sns.json](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/main/journal/assets/service-health-sns.json) file
 
 
 ![image](https://user-images.githubusercontent.com/37842433/219377414-d9383afb-08fc-45a8-92ae-58a5d8c29ca3.png)
