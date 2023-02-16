@@ -121,6 +121,8 @@ Once deactivated, the keys were then deleted
 
 AWS Multi-Factor Authentication (MFA) is a simple best practice that adds an extra layer of protection on top of user name and password.
 
+:memo: **Note:** MFA was set for all of my accounts (root user inclusive).
+
 ![image](https://user-images.githubusercontent.com/37842433/219368967-9be9f6f7-088a-4da5-bd9f-f2fd30c3a69a.png)
 
 ![image](https://user-images.githubusercontent.com/37842433/219369039-e7aa93ea-6ae0-4846-a1c1-2c9fa048da9d.png)
