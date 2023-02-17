@@ -15,6 +15,8 @@
   - [IAM role](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#iam-role)
   - [EventBridge (Health Dashboard) & SNS Setup](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#eventbridge-health-dashboard--sns-setup)
   - [Open a support ticket and request a service limit](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#open-a-support-ticket-and-request-a-service-limit)
+  - [Review all the questions of each pillars in the Well Architected Tool](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week0.md#review-all-the-questions-of-each-pillars-in-the-well-architected-tool)
+
 
 ## Required Homework (Instructional Homework)
 
@@ -193,4 +195,15 @@ I received a response from *AWS Support* indicating that due to my new account, 
 ![image](https://user-images.githubusercontent.com/37842433/219367666-6783ebde-da31-4aa9-a67a-7c8da01bd62f.png)
 
 ---
+
+### Review all the questions of each pillars in the Well Architected Tool
+
+I carried out an assessment of the AWS Well Architected Tool by answering the questions based on the 6 pillares
+
+    - Operational Excellence
+    - Security
+    - Reliability
+    - Performance Efficiency
+    - Cost Optimization
+    - Sustainability
 
