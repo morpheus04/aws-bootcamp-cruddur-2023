@@ -198,7 +198,7 @@ I received a response from *AWS Support* indicating that due to my new account, 
 
 ### Review all the questions of each pillars in the Well Architected Tool
 
-I carried out an assessment of the AWS Well Architected Tool by answering the questions based on the 6 pillares
+I carried out an assessment of the AWS Well Architected Tool by answering the questions based on the 6 pillars. The report can be found in [Demy-Cruddur_well_architected.pdf](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/assets/Demy-Cruddur_well_architected.pdf)
 
     - Operational Excellence
     - Security
