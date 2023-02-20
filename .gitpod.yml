@@ -13,4 +13,4 @@ tasks:
       cd /workspace/aws-bootcamp-cruddur-2023/backend-flask
       pip3 install -r requirements.txt
       cd /workspace/aws-bootcamp-cruddur-2023/frontend-react-js
-      npm i 
+      npm i
