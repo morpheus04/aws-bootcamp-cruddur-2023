@@ -3,7 +3,7 @@ class HomeActivities:
   def run():
     results = [{
       'handle':  'Andrew Brown',
-      'message': 'Cloud is fun!',
+      'message': 'Cloud is very fun!',
       'created_at': datetime.now().isoformat('#')
     }]
     return results
