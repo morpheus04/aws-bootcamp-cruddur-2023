@@ -16,6 +16,11 @@ RUN pip3 install -r requirements.txt
 # Copy everything in the current directory
 COPY . .
 
+# Install curl to allow health check to work
+RUN apt-get update 
+RUN apt-get install -y gcc
+RUN apt-get install -y curl
+
 # Set Environment Variables (Env Vars)
 ENV FLASK_ENV=development
 
