@@ -9,7 +9,7 @@ services:
       - "4567:4567"
 # Health check for backend (using curl)
     healthcheck:
-      test: curl --fail https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}/api/activities/home || exit 1
+      test: curl --fail https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}/api/activities/home/
       interval: 60s
       retries: 5
       start_period: 20s
@@ -24,7 +24,7 @@ services:
       - "3000:3000"
 # Health check for frontend (using wget)
     healthcheck:
-      test: wget --fail https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST} || exit 1
+      test: wget --fail https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}/
       interval: 60s
       retries: 5
       start_period: 20s
