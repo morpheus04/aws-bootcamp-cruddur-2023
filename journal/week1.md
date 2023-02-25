@@ -2,15 +2,15 @@
 
 #### Table of Contents
 
-+ [Required Homework](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week1.md#required-homework)
-  - Containerize Backend and Frontend
-  - Notification Endpoint for the OpenAI Document
-  - Flask Backend Endpoint for Notifications
-  - React Page for Notifications
-  - DynamoDB Local Container
-  - Postgres Container
++ [Required Homework](#required-homework)
+  - [Containerize Backend and Frontend](#containerize-backend-and-frontend)
+  - [Notification Endpoint for the OpenAI Document](#notification-endpoint-for-the-openai-document)
+  - [Flask Backend Endpoint for Notifications](#flask-backend-endpoint-for-notifications)
+  - [React Page for Notifications](#react-page-for-notifications)
+  - [DynamoDB Local Container](#dynamodb-local-container)
+  - [Postgres Container](#postgres-container)
       
-* [Homework Challenges](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/blob/main/journal/week1.md#homework-challenges)
+* [Homework Challenges](#homework-challenges)
   - Push and tag a image to DockerHub
   - Use multi-stage building for a Dockerfile build
   - Install Docker on localmachine & run containers
@@ -46,7 +46,7 @@ cd ..
 #### Docker Configuration
 
 - Successfully created and added `Dockerfile` for each backend and frontent app as well as a `docker-compose.yml` file
-- [Link to commit a7cc30 showing the configurations](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/a7cc30c9d6ba894936bb74693756dba37864258d?diff=split)
+- [Link to commit a7cc30c showing the configurations](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/a7cc30c9d6ba894936bb74693756dba37864258d?diff=split)
 
 
 #### Running a Container
@@ -63,7 +63,7 @@ docker run -p 3000:3000 -d frontend-react-js
 
 #### Multiple containers & images
 
-- Created a `docker-compose.yml` file to allow multiple containers to be build as shown in the [link for commit a7cc30](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/a7cc30c9d6ba894936bb74693756dba37864258d?diff=split)
+- Created a `docker-compose.yml` file to allow multiple containers to be build as shown in the [link for commit a7cc30c](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/a7cc30c9d6ba894936bb74693756dba37864258d?diff=split)
 
 - Docker Containers
 ```
@@ -82,27 +82,66 @@ aws-bootcamp-cruddur-2023-backend-flask       latest      0e9738e35f1c   33 minu
 ```
 
 #### Added `npm i` to gitpod.yml to avoid running it manually
-[Link to commit b28f66 showing the changes](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/b28f6692175d3dbbb6bd8f058cee1310ff27b9c4?diff=split)
+[Link to commit b28f669 showing the changes](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/b28f6692175d3dbbb6bd8f058cee1310ff27b9c4?diff=split)
 
 ---
 
 ### Notification Endpoint for the OpenAI Document
+[Link to commit b28f669 showing the changes](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/b28f6692175d3dbbb6bd8f058cee1310ff27b9c4?diff=split2)
+
+
+[Link to commit 4d7c801 showing further changes](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/4d7c8016b869331f7243b1642a59f577e8177551?diff=split)
 
 ---
 
 ### Flask Backend Endpoint for Notifications
+[Link to commit e0dca78 showing the changes made](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/e0dca78d60a2b78f538c7a1958251c8e51de7369?diff=split)
 
 ---
 
 ### React Page for Notifications
 
+The backend page showing the result of browsing to `/api/activities/notifications` is shown below in a json formatted page
+
+![image](https://user-images.githubusercontent.com/37842433/221383978-6a9ebd78-f41b-4187-abaa-97baac55f4bd.png)
+
 ---
 
 ### DynamoDB Local Container
 
+[Link to commit ab7fcb8 showing the changes made](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/ab7fcb89084a508aaac3cb375d0f50e02a89ee61?diff=split)
+
+- Ran the `docker-compose.yml` file to spin up the `dynamoDB` container which was on `port 8000`. Result of which is seen below
+
+![image](https://user-images.githubusercontent.com/37842433/221384359-da6ce453-c78a-4ee6-a385-dafc9df8240f.png)
+
+
+- Created a table locally, added items to the table
+
+![image](https://user-images.githubusercontent.com/37842433/221384321-c584041b-bd5b-4691-9293-fc26eeb03d76.png)
+
+
+
 ---
 
 ### Postgres Container
+
+[Link to commit ab7fcb8 showing the changes made](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/ab7fcb89084a508aaac3cb375d0f50e02a89ee61?diff=split)
+
+- Ran the `docker-compose.yml` file to spin up the `postgres` container which was on `port 5432` as seen below
+
+![image](https://user-images.githubusercontent.com/37842433/221384504-4f5c6bfe-51a6-4122-8ab8-eb198596a2f8.png)
+
+
+- Installed Visual Studio Code extension `PostgreSQL` which is a PostgreSQL Management Tool, I was able to setup the postgres connection as seen below
+
+![image](https://user-images.githubusercontent.com/37842433/221384580-c89ae658-a2c7-4a6f-912d-740e92b9b41c.png)
+
+- Using the terminal, I was further able tp login to the postgress database
+`psql -Upostgress -h localhost`
+
+![image](https://user-images.githubusercontent.com/37842433/221384645-01277b27-a0e9-4751-8a5e-8da2c7ec9ff8.png)
+
 
 ***
 
