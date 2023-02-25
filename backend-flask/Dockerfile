@@ -17,7 +17,7 @@ RUN pip3 install -r requirements.txt
 COPY . .
 
 # Install curl to allow health check to work
-RUN apt-get update 
+RUN apt-get update -y
 RUN apt-get install -y gcc
 RUN apt-get install -y curl
 
