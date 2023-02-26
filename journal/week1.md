@@ -113,7 +113,10 @@ The backend page showing the result of browsing to `/api/activities/notification
 
 - Ran the `docker-compose.yml` file to spin up the `dynamoDB` container which was on `port 8000`. Result of which is seen below
 
-![image](https://user-images.githubusercontent.com/37842433/221384359-da6ce453-c78a-4ee6-a385-dafc9df8240f.png)
+```sh
+CONTAINER ID   IMAGE                                         COMMAND                  CREATED          STATUS                             PORTS                                       NAMES
+3296488b5658   amazon/dynamodb-local:latest                  "java -jar DynamoDBL…"   29 seconds ago   Up 29 seconds                      0.0.0.0:8000->8000/tcp, :::8000->8000/tcp   dynamodb-local
+```
 
 
 - Created a table locally, added items to the table
@@ -129,6 +132,12 @@ The backend page showing the result of browsing to `/api/activities/notification
 [Link to commit ab7fcb8 showing the changes made](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/ab7fcb89084a508aaac3cb375d0f50e02a89ee61?diff=split)
 
 - Ran the `docker-compose.yml` file to spin up the `postgres` container which was on `port 5432` as seen below
+
+```sh
+CONTAINER ID   IMAGE                                         COMMAND                  CREATED          STATUS                             PORTS                                       NAMES
+3048dcde231f   postgres:13-alpine                            "docker-entrypoint.s…"   29 seconds ago   Up 29 seconds                      0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   aws-bootcamp-cruddur-2023-db-1
+```
+
 
 ![image](https://user-images.githubusercontent.com/37842433/221384504-4f5c6bfe-51a6-4122-8ab8-eb198596a2f8.png)
 
