@@ -11,12 +11,12 @@
   - [Postgres Container](#postgres-container)
       
 * [Homework Challenges](#homework-challenges)
-  - Push and tag a image to DockerHub
-  - Use multi-stage building for a Dockerfile build
-  - Install Docker on localmachine & run containers
-  - Pull a Container into EC2 instance with docker installed
-  - Implement a healthcheck in the V3 Docker compose file
-  - Run the dockerfile CMD as an external script
+  - [Push and tag a image to DockerHub](#push-and-tag-a-image-to-dockerhub)
+  - [Use multi-stage building for a Dockerfile build](#use-multi-stage-building-for-a-dockerfile-build)
+  - [Install Docker on localmachine & run containers](#install-docker-on-localmachine--run-containers)
+  - [Pull a Container into EC2 instance with docker installed](#pull-a-container-into-ec2-instance-with-docker-installed)
+  - [Implement a healthcheck in the V3 Docker compose file](#implement-a-healthcheck-in-the-v3-docker-compose-file)
+  - [Run the dockerfile CMD as an external script]()
 
 
 ## Required Homework
