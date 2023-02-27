@@ -456,7 +456,7 @@ services:
       - ./backend-flask:/backend-flask
   frontend-react-js:
     environment:
-      REACT_APP_BACKEND_URL: "http://localhost:4567"
+      REACT_APP_BACKEND_URL: "[http://localhost:4567](https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST})"
     build: ./frontend-react-js
     ports:
       - "3000:3000"
