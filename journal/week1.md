@@ -17,6 +17,7 @@
   - [Pull a Container into EC2 instance with docker installed](#pull-a-container-into-ec2-instance-with-docker-installed)
   - [Implement a healthcheck in the V3 Docker compose file](#implement-a-healthcheck-in-the-v3-docker-compose-file)
   - [Docker Best Practices](#docker-best-practices)
+  - [Run the dockerfile CMD as an external script](#run-the-dockerfile-cmd-as-an-external-script)
 
 
 ## Required Homework
@@ -525,4 +526,69 @@ RUN apt-get install -y gcc
 RUN apt-get install -y wget
 RUN apt-get install -y curl
 ```
+
+
+- Ran Dockerfile CMD as an external script
+
+The use of an external bash script to run a Dockerfile. The bash script was then passed into the Dockerfile via the `CMD` instruction.
+
+`CMD [ "./execute_flask.sh"]`
+
+---
+
+### Run the Dockerfile CMD as an external script
+
+#### Added external bash script
+
+- [Created an external bash script](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/94b22ec5ab7dfeeb11f3d723f94b4a0c69940686?diff=split)
+
+```
+#!/bin/bash
+python3 -m flask run --host=0.0.0.0 --port=4567
+```
+
+#### Modified Backend Dockerfile
+
+- [Made a change to the backend Dockerfile to reference the external bash script](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/ada483f961bcfaf7852faa9d52243c60a73d8e24?diff=split)
+
+
+#### Ran Backend Container to make sure bash script worked
+
+```sh
++] Building 4.0s (11/11) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                                                    0.1s 
+ => => transferring dockerfile: 32B                                                                                                                                                                     0.0s 
+ => [internal] load .dockerignore                                                                                                                                                                       0.1s 
+ => => transferring context: 2B                                                                                                                                                                         0.0s 
+ => [internal] load metadata for docker.io/library/python:3.10-slim-buster                                                                                                                              3.4s 
+ => [auth] library/python:pull token for registry-1.docker.io                                                                                                                                           0.0s 
+ => [1/5] FROM docker.io/library/python:3.10-slim-buster@sha256:c059afb019e7aea99777e54b3e0ff8c970ef552b737fb4acbd842916c751fcfd                                                                        0.0s 
+ => [internal] load build context                                                                                                                                                                       0.1s 
+ => => transferring context: 2.06kB                                                                                                                                                                     0.0s 
+ => CACHED [2/5] WORKDIR /backend-flask                                                                                                                                                                 0.0s 
+ => CACHED [3/5] COPY requirements.txt requirements.txt                                                                                                                                                 0.0s 
+ => CACHED [4/5] RUN pip3 install -r requirements.txt                                                                                                                                                   0.0s 
+ => CACHED [5/5] COPY . .                                                                                                                                                                               0.0s 
+ => exporting to image                                                                                                                                                                                  0.1s 
+ => => exporting layers                                                                                                                                                                                 0.0s 
+ => => writing image sha256:d9527a701e3d4a1c5ff6f49b1f036ddcc0e38623fb2687de036f1087c8e5e082                                                                                                            0.0s 
+ => => naming to docker.io/library/aws-bootcamp-cruddur-2023-main-backend-flask                                                                                                                         0.0s 
+[+] Running 2/2
+ - Network aws-bootcamp-cruddur-2023-main_default            Created                                                                                                                                    0.7s
+ - Container aws-bootcamp-cruddur-2023-main-backend-flask-1  Started                                                                                                                                    3.0s
+```
+
+#### Verify Backend container is running
+
+- Docker Desktop
+
+![image](https://user-images.githubusercontent.com/37842433/221665433-4b6a440a-f9e3-4d7d-8f7a-2e3056c08d85.png)
+
+
+- Browser (This was done locally)
+
+![image](https://user-images.githubusercontent.com/37842433/221665528-59d3cd83-fe99-4aac-8973-256f0d279f58.png)
+
+
+
 
