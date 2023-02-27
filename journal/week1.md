@@ -160,17 +160,188 @@ CONTAINER ID   IMAGE                                         COMMAND            
 
 ### Push and tag a image to DockerHub
 
+Pushing and tagging of images to DockerHub can be done via several ways, a couple of which are:
+
+- Visual Studio Code Docker Registries
+
+![image](https://user-images.githubusercontent.com/37842433/221577567-cdaac89e-cebd-4c09-95ae-a9f2de2d3c53.png)
+
+![image](https://user-images.githubusercontent.com/37842433/221577013-332c4073-4bdd-4cd7-a4f9-c7b3f1f0478b.png)
+
+- Command Line using the command below
+
+![image](https://user-images.githubusercontent.com/37842433/221577963-ed8bebf5-6258-45d3-88d7-b690b41ad947.png)
+
+
+#### 1. Log in to DockerHub
+```sh
+docker login
+```
+
+#### 2. Tag image
+```sh
+docker tag frontend morpheus04/aws-bootcamp-cruddur-2023-main-frontend-react-js:latest
+```
+OR
+
+![image](https://user-images.githubusercontent.com/37842433/221579077-dc0ceee1-4f4f-4220-a94e-9708c1db9f07.png)
+
+
+#### 3. Push the image to DockerHub
+```sh
+docker push morpheus04/aws-bootcamp-cruddur-2023-main-frontend-react-js:latest
+```
+OR
+
+![image](https://user-images.githubusercontent.com/37842433/221579375-2109db97-2a9b-4f4b-a3d7-ab214e2fdc50.png)
+
+
+##### Log
+
+![image](https://user-images.githubusercontent.com/37842433/221579599-e93a0aff-f657-4ceb-9966-adec97169007.png)
+
+
+#### 4. Verify in DockerHub of image push
+
+![image](https://user-images.githubusercontent.com/37842433/221579833-6048f641-44ec-44c9-94fd-66dab3d078f5.png)
+
+OR
+
+![image](https://user-images.githubusercontent.com/37842433/221580570-f9edbd8c-bda2-441f-9ee1-b9bb4c3344a7.png)
+
+
+#### 5. Deleting the Docker Hub credentials from the ~/.docker/config.json
+```sh
+docker logout
+```
 ---
 
 ### Use multi-stage building for a Dockerfile build
+
+Docker multi-stage build is about building images by keeping the image size down. Here I used the backend Dockerfile as an example
+
+#### Pre Application Build
+
+Here the main build is `130MB`
+
+```sh
+$ docker images awsbootcamp2023-backend-main:latest
+REPOSITORY                     TAG       IMAGE ID       CREATED          SIZE 
+awsbootcamp2023-backend-main   latest    58748b8f9184   20 seconds ago   130MB 
+```
+
+#### Build Application
+
+Here we are adding an `AS builder` to the `FROM python:3.10-slim-buster` instruction
+
+```sh
+# Build the application
+FROM python:3.10-slim-buster AS builder
+WORKDIR /backend-flask
+COPY requirements.txt requirements.txt
+RUN pip3 install --user --no-cache-dir -r requirements.txt
+COPY . .
+```
+
+#### Run Application
+
+```sh
+# Run the application
+FROM python:3.10-slim-buster
+WORKDIR /backend-flask
+COPY --from=builder ..
+
+ENV FLASK_ENV=development
+
+EXPOSE ${PORT}
+
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
+```
+
+#### Post Application Build
+
+Here we will verify the original size that reduced with a slightly slimmed down size of `129MB` after post build
+
+```sh
+$ docker images awsbootcamp2023-backend-main:latest
+REPOSITORY                     TAG       IMAGE ID       CREATED          SIZE 
+awsbootcamp2023-backend-main   latest    3558c60414de   12 seconds ago   129MB 
+```
 
 ---
 
 ### Install Docker on localmachine & run containers
 
+#### Installed Docker Desktop on Windows
+
+- Installed Docker Desktop on a Windows OS machine
+
+![image](https://user-images.githubusercontent.com/37842433/221589881-0a7122c8-63ef-49b6-86fd-c058b86e63a8.png)
+
+
+- Cloned the repo
+
+- Made Changes to `docker-compose.yml` locally, These changes are identfied with the arrows
+
+```sh
+version: "3.8"
+services:
+  backend-flask:
+    environment:
+      FRONTEND_URL: "http://localhost:3000" <-----
+      BACKEND_URL: "http://localhost:4567"  <-----
+    build: ./backend-flask
+    ports:
+      - "4567:4567"
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:4567/api/activities/home  <-----
+      interval: 60s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+    volumes:
+      - ./backend-flask:/backend-flask
+   frontend-react-js:
+    environment:
+      REACT_APP_BACKEND_URL: "http://localhost:4567"  <-----
+    build: ./frontend-react-js 
+```
+
+
+- Verify Containers are running in Docker Desktop
+
+![image](https://user-images.githubusercontent.com/37842433/221595125-a1171d9a-e31e-434e-bd02-8161172aeedc.png)
+
+
+- Verify Backend running on localhost:4567
+
+![image](https://user-images.githubusercontent.com/37842433/221595824-973f9e5f-12ef-4a76-920e-b35ed40662db.png)
+
+
+- Verify Frontend running on localhost:3000
+
+![image](https://user-images.githubusercontent.com/37842433/221595988-8dbcdc69-3fdd-47af-8b8f-23cd8691ec2e.png)
+
 ---
 
+
 ### Pull a Container into EC2 instance with docker installed
+
+#### Provisioned EC2 Amazon Linux 2 instance
+
+- AMI Images used `amazon/amzn2-ami-kernel-5.10-hvm-2.0.20230207.0-x86_64-gp2`
+- Instance details seen below
+
+![image](https://user-images.githubusercontent.com/37842433/221599149-71c8df91-71ee-4bca-9a07-0ed5b9195317.png)
+
+
+#### Created Security Group
+
+- Created a Security Group (SG) and attached to EC instance
+- SG was then modified by adding inbound rules as seen below
+
+![image](https://user-images.githubusercontent.com/37842433/221598205-aa1e362c-1498-4e4c-a3b3-bb82cb56471b.png)
+
 
 ---
 
