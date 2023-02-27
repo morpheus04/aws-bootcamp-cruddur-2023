@@ -20,6 +20,7 @@ COPY . .
 RUN apt-get update -y
 RUN apt-get install -y gcc
 RUN apt-get install -y curl
+RUN apt-get install -y wget
 
 # Set Environment Variables (Env Vars)
 ENV FLASK_ENV=development
