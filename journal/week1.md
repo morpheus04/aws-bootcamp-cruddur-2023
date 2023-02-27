@@ -16,7 +16,7 @@
   - [Install Docker on localmachine & run containers](#install-docker-on-localmachine--run-containers)
   - [Pull a Container into EC2 instance with docker installed](#pull-a-container-into-ec2-instance-with-docker-installed)
   - [Implement a healthcheck in the V3 Docker compose file](#implement-a-healthcheck-in-the-v3-docker-compose-file)
-  - [Run the dockerfile CMD as an external script]()
+  - [Docker Best Practices](#docker-best-practices)
 
 
 ## Required Homework
@@ -332,21 +332,197 @@ services:
 - AMI Images used `amazon/amzn2-ami-kernel-5.10-hvm-2.0.20230207.0-x86_64-gp2`
 - Instance details seen below
 
-![image](https://user-images.githubusercontent.com/37842433/221599149-71c8df91-71ee-4bca-9a07-0ed5b9195317.png)
+![image](https://user-images.githubusercontent.com/37842433/221599961-faca7544-c626-4d30-ac52-3fc90ae883d6.png)
 
 
 #### Created Security Group
 
 - Created a Security Group (SG) and attached to EC instance
-- SG was then modified by adding inbound rules as seen below
+- SG was then modified by adding inbound rules for incoming traffic based on the ports as seen below
 
 ![image](https://user-images.githubusercontent.com/37842433/221598205-aa1e362c-1498-4e4c-a3b3-bb82cb56471b.png)
 
+
+
+#### Docker Install
+
+- As part of provisioning of the EC Instance, I added the following to the Userdata section
+```sh
+sudo yum update -y
+sudo yum install docker-y
+sudo usermod -a -G docker ec2-user
+id ec2-user
+newgrp docker
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+```
+
+- Logged into EC Linux instance via SSH remote tool
+- Installed docker-compose
+```sh
+sudo yum install python3-pip
+sudo pip3 install docker-compose
+```
+- Verified docker was up and running
+`sudo systemctl status docker.service`
+
+
+#### Cloning the Docker Cruddur application
+
+- Login into Docker
+```
+docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: *REDACTED*
+Password: *REDACTED*
+WARNING! Your password will be stored unencrypted in /home/gitpod/.docker/config.json.
+```
+**WARNING! Your password will be stored unencrypted in /home/ec2-user/.docker/config.json.** this looks like a potential problem. Remember to do `docker logout` in the end to remove the credentials from the `config.json`. Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+
+#### Pull DockerHub container
+`docker pull morpheus04/aws-bootcamp-cruddur-2023-main-backend-flask`
+
+##### Log
+```sh
+Using default tag: latest
+latest: Pulling from morpheus04/aws-bootcamp-cruddur-2023-main-backend-flask
+29cd48154c03: Pull complete
+2c59e55cfd71: Pull complete
+3b4b58298de0: Pull complete
+6239e464c1ab: Pull complete
+047dd5665bb1: Pull complete
+73099005ce62: Pull complete
+b9daf3e099ed: Pull complete
+9dfca1ca04ce: Pull complete
+8fc247f86e63: Pull complete
+Digest: sha256:eb8ef47f24e7aaed809e3c1d05c0bf88b6da44e50d9cf487ecd5607544ad54bb
+Status: Downloaded newer image for morpheus04/aws-bootcamp-cruddur-2023-main-backend-flask:latest
+docker.io/morpheus04/aws-bootcamp-cruddur-2023-main-backend-flask:latest
+```
+
+
+#### Run Pulled Backend container
+```sh
+[ec2-user@ip-172-31-48-128 ~]$sudo docker run -d -p 4567:4567 morpheus04/aws-bootcamp-cruddur-2023-main-backend-flask
+2dae366a28e8552e186a946a927830a7557a7027b98a258bdd2c78cd35c734c3
+```
+
+#### Verify Container is running
+```sh
+[ec2-user@ip-172-31-48-128 ~]$ sudo netstat -tulpn | grep LISTEN
+tcp        0      0 127.0.0.1:40817         0.0.0.0:*               LISTEN      2956/containerd
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      3154/sshd
+tcp        0      0 0.0.0.0:4567            0.0.0.0:*               LISTEN      7759/docker-proxy
+tcp        0      0 0.0.0.0:3000            0.0.0.0:*               LISTEN      7929/docker-proxy
+tcp6       0      0 :::80                   :::*                    LISTEN      2952/httpd
+tcp6       0      0 :::22                   :::*                    LISTEN      3154/sshd
+tcp6       0      0 :::4567                 :::*                    LISTEN      7764/docker-proxy
+tcp6       0      0 :::3000                 :::*                    LISTEN      7934/docker-proxy
+```
+
+![image](https://user-images.githubusercontent.com/37842433/221623434-7042686b-d2e2-4f5d-982c-7e9f7ae56d90.png)
+
+
+#### Logout of DockerHub
+`docker logout`
 
 ---
 
 ### Implement a healthcheck in the V3 Docker compose file
 
+- Added healthchecks to docker-compose.yml
+
+[link to commit 3d051d3](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/3d051d3ca3f545d9b2a84a2acf33fd38a39b9e73?diff=split)
+
+```sh
+version: "3.8"
+services:
+  backend-flask:
+    environment:
+      FRONTEND_URL: "https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+      FRONTEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+    build: ./backend-flask
+    ports:
+      - "4567:4567"
+    healthcheck:
+      test: curl --fail https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}/api/activities/home
+      interval: 60s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+    volumes:
+      - ./backend-flask:/backend-flask
+  frontend-react-js:
+    environment:
+      REACT_APP_BACKEND_URL: "http://localhost:4567"
+    build: ./frontend-react-js
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST} || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+    volumes:
+      - ./frontend-react-js:/frontend-react-js
+```
+
+:bulb: **Tip:** I had to add curl * wget in the Dockerfiles for the healthcheck so they are installed into the container before it starts up.
+```dockerfile
+RUN apt-get update -y
+RUN apt-get install -y gcc
+RUN apt-get install -y wget
+RUN apt-get install -y curl
+```
+
+
+#### Verify Healthchecks
+
+##### Healthy Containers
+```sh
+ee7fd2051447   aws-bootcamp-cruddur-2023-frontend-react-js   "docker-entrypoint.s…"   6 minutes ago   Up 31 seconds (healthy)   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   aws-bootcamp-cruddur-2023-frontend-react-js-1
+f9216c6b5c01   postgres:13-alpine                            "docker-entrypoint.s…"   6 minutes ago   Up About a minute               0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   aws-bootcamp-cruddur-2023-db-1
+579870d8275e   amazon/dynamodb-local:latest                  "java -jar DynamoDBL…"   6 minutes ago   Up About a minute               0.0.0.0:8000->8000/tcp, :::8000->8000/tcp   dynamodb-local
+fa66627a696c   aws-bootcamp-cruddur-2023-backend-flask       "python3 -m flask ru…"   6 minutes ago   Up 31 seconds (healthy)   0.0.0.0:4567->4567/tcp, :::4567->4567/tcp   aws-bootcamp-cruddur-2023-backend-flask-1
+```
+
+
+##### Unhealthy Containers
+```sh
+ee7fd2051447   aws-bootcamp-cruddur-2023-frontend-react-js   "docker-entrypoint.s…"   6 minutes ago   Up About a minute (unhealthy)   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   aws-bootcamp-cruddur-2023-frontend-react-js-1
+fa66627a696c   aws-bootcamp-cruddur-2023-backend-flask       "python3 -m flask ru…"   6 minutes ago   Up About a minute (unhealthy)   0.0.0.0:4567->4567/tcp, :::4567->4567/tcp   aws-bootcamp-cruddur-2023-backend-flask-1
+```
+
+![image](https://user-images.githubusercontent.com/37842433/221629105-d1353fd6-355a-4831-ad3f-68eaece2a4de.png)
+
 ---
 
-### Run the dockerfile CMD as an external script
+### Docker Best Practices
+
+- Use multi-stage builds
+
+The use of `AS builder` added to the `FROM python:3.10-slim-buster`
+```sh
+# Build the application
+FROM python:3.10-slim-buster AS builder
+WORKDIR /backend-flask
+COPY requirements.txt requirements.txt
+RUN pip3 install --user --no-cache-dir -r requirements.txt
+COPY . .
+```
+
+- Run Statements
+
+The use of `RUN` command to `apt-get` to e.g. install necessary packages in `Dockerfiles` in my example for the healthchecks
+
+```
+# Install curl to allow health check to work
+RUN apt-get update -y
+RUN apt-get install -y gcc
+RUN apt-get install -y wget
+RUN apt-get install -y curl
+```
+
