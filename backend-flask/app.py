@@ -19,6 +19,7 @@ from services.show_activity import *
 from aws_xray_sdk.core import xray_recorder
 from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
 
+
 # Cloudwatch Logs ------
 import watchtower
 import logging
@@ -55,6 +56,11 @@ provider.add_span_processor(processor)
 trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 
+
+# AWS X-RAY
+xray_url = os.getenv("AWS_XRAY_URL")
+xray_recorder.configure(service='Cruddur', dynamic_naming=xray_url)
+XRayMiddleware(app, xray_recorder)
 
 app = Flask(__name__)
 
