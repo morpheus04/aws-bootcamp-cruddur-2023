@@ -341,7 +341,7 @@ services:
 - Created a Security Group (SG) and attached to EC2 instance
 - SG was then modified by adding inbound rules for incoming traffic based on the ports as seen below
 
-![image](https://user-images.githubusercontent.com/37842433/221598205-aa1e362c-1498-4e4c-a3b3-bb82cb56471b.png)
+![image](https://user-images.githubusercontent.com/37842433/221854866-653ad5f4-0a77-4042-ab53-b2ba921ad53d.png)
 
 
 
