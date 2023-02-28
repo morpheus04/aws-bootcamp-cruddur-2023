@@ -2,6 +2,8 @@ flask
 flask-cors
 aws-xray-sdk
 watchtower
+blinker
+rollbar
 
 opentelemetry-api
 opentelemetry-sdk
