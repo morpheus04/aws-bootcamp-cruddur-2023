@@ -84,7 +84,6 @@ These instruction should be in the main app function `app = Flask(__name__)` as 
 
 Ran the `docker-compose.yml` file just for the backend app
 
-
 ```sh
 # HoneyComb ----------
 from opentelemetry import trace
@@ -94,6 +93,36 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 ```
+
+  - Dataset "Cruddur" was created
+  
+  ![image](https://user-images.githubusercontent.com/37842433/222801270-3962d958-5b1f-41fe-ab35-0f48e00f83e0.png)
+  
+
+- Added a Span to create traces
+
+Modified `home_activities.py` by adding the code below
+
+``` sh
+from opentelemetry import trace
+tracer = trace.get_tracer("home.activities")
+```
+
+- Create Mock Data Span
+  - Modified the class `HomeActivities`
+  - inside `def run()` function of `home_activities.py` by adding the code below
+
+```sh
+with tracer.start_as_current_span("home-activities-mock-data"): now = datetime.now(timezone.utc).astimezone()
+```
+
+- Span Result
+
+![image](https://user-images.githubusercontent.com/37842433/222801847-b6fbd8cc-b9de-41fe-aadd-7e0e78fdb9e8.png)
+
+
+  
+
 
 ---
 
