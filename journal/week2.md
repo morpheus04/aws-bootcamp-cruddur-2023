@@ -28,6 +28,8 @@
 
 - Created HoneyComb Account
 
+HoneyComb Account create and linked to GitHub.
+
 - Created new environment
 
 ![image](https://user-images.githubusercontent.com/37842433/222771769-37c89cd7-e7ef-4cf2-8a92-4170af375287.png)
@@ -120,14 +122,20 @@ with tracer.start_as_current_span("home-activities-mock-data"): now = datetime.n
 
 ![image](https://user-images.githubusercontent.com/37842433/222801847-b6fbd8cc-b9de-41fe-aadd-7e0e78fdb9e8.png)
 
-
-  
-
-
+ 
 ---
 
 
 ### Run queries to explore traces within Honeycomb.io
+
+Ran query to get `AVG, COUNT of http_code=200`
+
+![image](https://user-images.githubusercontent.com/37842433/222807146-fd93a979-0e79-43c8-a10a-3d526e12dc1c.png)
+
+Traces
+
+![image](https://user-images.githubusercontent.com/37842433/222808345-3ca4b2c7-683d-45b9-9cd2-23efd4c4a48f.png)
+
 
 
 ---
