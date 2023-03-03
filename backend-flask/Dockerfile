@@ -16,8 +16,8 @@ RUN pip3 install -r requirements.txt
 # Copy everything in the current directory
 COPY . .
 
-#COPY execute_flask.sh .
-#RUN chmod +x ./execute_flask.sh
+#COPY execute_flask.sh /
+#RUN chmod +x /execute_flask.sh && execute_flask.sh
 
 # Install curl to allow health check to work
 RUN apt-get update -y
