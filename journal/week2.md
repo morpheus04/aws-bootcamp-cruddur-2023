@@ -26,6 +26,74 @@
 
 ### Instrument Honeycomb with OTEL
 
+- Created HoneyComb Account
+
+- Created new environment
+
+![image](https://user-images.githubusercontent.com/37842433/222771769-37c89cd7-e7ef-4cf2-8a92-4170af375287.png)
+
+- Each environment has a set of API keys that needs to be used for integration (via `environment variables` with e.g. Gitpod etc. Those API keys will then be used automatically whenever Gitpod is trying to send traces to Honeycomb
+
+![image](https://user-images.githubusercontent.com/37842433/222772564-77003f1f-bfef-40fa-a959-19d6f0028f6a.png)
+
+- Set Gitpod `environment variables` using the HoneyComb API keys. 
+
+```sh
+export HONEYCOMB_API_KEY="REDACTED"
+export HONEYCOMB_SERVICE_NAME="Cruddur"
+
+gp env HONEYCOMB_API_KEY="REDACTED"
+gp env HONEYCOMB_SERVICE_NAME="Cruddur"
+```
+
+- Modify docker-compose file to add `env vars`
+
+[Commit link to 35fc97e](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/35fc97e5440b4381b011890025c0cea30b42a07d?diff=split#diff-e45e45baeda1c1e73482975a664062aa56f20c03dd9d64a827aba57775bed0d3)
+
+
+- Modify docker-compose file to add OpenTelemetry variables for the backend-flask service
+
+:warning: **Warning:** I had to set the `HONEYCOMB_SERVICE_NAME` variable globally for this task, however it is not recommended for production as this should be set per service!
+
+[Commit link to adding HONEYCOMB_SERVICE_NAME](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/35fc97e5440b4381b011890025c0cea30b42a07d?diff=split#diff-e45e45baeda1c1e73482975a664062aa56f20c03dd9d64a827aba57775bed0d3)
+
+- Install the Python modules for OpenTelemetry
+
+[This was done by adding the dependencies to the `requirements.txt`](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/35fc97e5440b4381b011890025c0cea30b42a07d?diff=split#diff-55d5801c5f315ed423b03e986f4ecf1d3915c097ac8c66c733f0e4cbc17cfee3)
+
+```sh
+opentelemetry-api 
+opentelemetry-sdk 
+opentelemetry-exporter-otlp-proto-http 
+opentelemetry-instrumentation-flask 
+opentelemetry-instrumentation-requests
+```
+
+Then install these OpenTelemetry dependencies:
+`pip install -r requirements.txt`
+
+- Libraries Import Add to app.py
+
+`opentelemetry` modules need to import the required libraries to carry out instructions. This is seen in the [commit link](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/35fc97e5440b4381b011890025c0cea30b42a07d?diff=split#diff-0014cc1f7ffd53e63ff797f0f2925a994fbd6797480d9ca5bbc5dc65f1b56438)
+
+- Initialize automatic instrumentation with Flask
+
+These instruction should be in the main app function `app = Flask(__name__)` as seen in the [commit link](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/35fc97e5440b4381b011890025c0cea30b42a07d?diff=split#diff-0014cc1f7ffd53e63ff797f0f2925a994fbd6797480d9ca5bbc5dc65f1b56438)
+
+- Run Backend app via docker-compose file
+
+Ran the `docker-compose.yml` file just for the backend app
+
+
+```sh
+# HoneyComb ----------
+from opentelemetry import trace
+from opentelemetry.instrumentation.flask import FlaskInstrumentor
+from opentelemetry.instrumentation.requests import RequestsInstrumentor
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+```
 
 ---
 
