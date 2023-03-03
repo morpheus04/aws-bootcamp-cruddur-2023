@@ -16,6 +16,9 @@ RUN pip3 install -r requirements.txt
 # Copy everything in the current directory
 COPY . .
 
+#COPY execute_flask.sh .
+#RUN chmod +x ./execute_flask.sh
+
 # Install curl to allow health check to work
 RUN apt-get update -y
 RUN apt-get install -y gcc
@@ -27,5 +30,5 @@ ENV FLASK_ENV=development
 EXPOSE ${PORT}
 
 # python3 -m flask run --host=0.0.0.0 --port=4567
-# CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
-CMD [ "./execute_flask.sh"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
+# CMD [ "./execute_flask.sh"]
