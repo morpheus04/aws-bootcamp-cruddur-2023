@@ -399,14 +399,35 @@ LOGGER.info("Home testing Activities")
 
 ### Instrument Honeycomb for the frontend-application to observe network latency between frontend and backend
 
+- Install Open Telemetry packages
+
+```sh
+npm install --save \
+    @opentelemetry/api \
+    @opentelemetry/sdk-trace-web \
+    @opentelemetry/exporter-trace-otlp-http \
+    @opentelemetry/context-zone
+```
 
 ---
 
 
 ### Add custom instrumentation to Honeycomb to add more attributes
 
+- Custom span with a User ID
+
+[Commit link](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/f8c9a61a19386086f3328e2bd2c503ecd12c52a6?diff=split#diff-e7fc4f0f2b4e4510d81bbc953fe4e4198587359967fc005d49cb23f39e7f3130)
+
+![image](https://user-images.githubusercontent.com/37842433/222926608-be6c5b3d-79f7-4071-9c49-7075856b4a4f.png)
+
 
 ---
 
 
 ### Run custom queries in Honeycomb
+
+- Custom query based on `app.user_id`
+
+![image](https://user-images.githubusercontent.com/37842433/222926905-7adc392a-93f0-41ad-8b48-e0bab82ad155.png)
+
+
