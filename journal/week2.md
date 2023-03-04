@@ -327,6 +327,67 @@ def rollbar_test():
 
 ### Install WatchTower and write a custom logger to send application log data to CloudWatch Log group
 
+- Install the Python modules for WatchTower
+
+This was done by adding the dependencies to the `requirements.txt`
+
+```
+watchtower
+```
+
+
+- Import Libraries into `app.py`
+
+```sh
+# WatchTower & Cloudwatch Logs ---------
+import watchtower
+import logging
+from time import strftime
+```
+
+
+- Logger Configuration
+
+```sh
+# Configuring Logger to Use CloudWatch
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+console_handler = logging.StreamHandler()
+cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+LOGGER.addHandler(console_handler)
+LOGGER.addHandler(cw_handler)
+LOGGER.info("some message")
+```
+
+
+- Logger Configuration for Cloudwatch Integration
+
+```sh
+# Configuring Logger to Use CloudWatch
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+console_handler = logging.StreamHandler()
+cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+LOGGER.addHandler(console_handler)
+LOGGER.addHandler(cw_handler)
+LOGGER.info("Home testing Activities")
+```
+
+
+- Set the env var in your backend-flask for `docker-compose.yml` file
+
+```sh
+      AWS_DEFAULT_REGION: "${AWS_DEFAULT_REGION}"
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+```
+
+
+- Cloudwatch Result & Log Group
+
+
+![image](https://user-images.githubusercontent.com/37842433/222923907-438df324-464b-48cb-be80-483aea893c18.png)
+
 
 ***
 
