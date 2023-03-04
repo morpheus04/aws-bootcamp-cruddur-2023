@@ -28,6 +28,8 @@
 
 - Created HoneyComb Account
 
+HoneyComb Account create and linked to GitHub.
+
 - Created new environment
 
 ![image](https://user-images.githubusercontent.com/37842433/222771769-37c89cd7-e7ef-4cf2-8a92-4170af375287.png)
@@ -120,14 +122,20 @@ with tracer.start_as_current_span("home-activities-mock-data"): now = datetime.n
 
 ![image](https://user-images.githubusercontent.com/37842433/222801847-b6fbd8cc-b9de-41fe-aadd-7e0e78fdb9e8.png)
 
-
-  
-
-
+ 
 ---
 
 
 ### Run queries to explore traces within Honeycomb.io
+
+Ran query to get `AVG, COUNT of http_code=200`
+
+![image](https://user-images.githubusercontent.com/37842433/222807146-fd93a979-0e79-43c8-a10a-3d526e12dc1c.png)
+
+Traces
+
+![image](https://user-images.githubusercontent.com/37842433/222808345-3ca4b2c7-683d-45b9-9cd2-23efd4c4a48f.png)
+
 
 
 ---
@@ -135,17 +143,60 @@ with tracer.start_as_current_span("home-activities-mock-data"): now = datetime.n
 
 ### Instrument AWS X-Ray into backend flask application
 
+- Install the Python modules for AWS X-RAY
+
+This was done by adding the dependencies to the `requirements.txt`
+
+```
+aws-xray-sdk
+```
 
 ---
 
 
 ### Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API
 
+- Added X-Ray Daemon to `docker-compose.yml` file
+
+:warning: **Warning:** I had to set the `AWS_REGION` variable globally for this task in Gitpod
+
+```sh
+xray-daemon:
+    image: "amazon/aws-xray-daemon"
+    environment:
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+      AWS_REGION: "${AWS_REGION}"
+    command:
+      - "xray -o -b xray-daemon:2000"
+    ports:
+      - 2000:2000/udp
+```
+
+- Added required environment variables to `docker-compose.yml` file
+
+```sh
+services:
+  backend-flask:
+    environment:
+    ...
+      AWS_XRAY_URL: "*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*"
+      AWS_XRAY_DAEMON_ADDRESS: "xray-daemon:2000"
+ ```
 
 ---
 
 
 ### Observe X-Ray traces within the AWS Console
+
+- Backend app trace
+
+![image](https://user-images.githubusercontent.com/37842433/222815134-82059ab0-d936-4d8b-adc5-bc71bc7dbb94.png)
+
+
+- Further queries
+
+![image](https://user-images.githubusercontent.com/37842433/222815912-d6905775-7086-4544-aec8-bf71e723c537.png)
 
 
 ---
@@ -153,17 +204,189 @@ with tracer.start_as_current_span("home-activities-mock-data"): now = datetime.n
 
 ### Integrate Rollbar for Error Logging
 
+- Install the Python modules for Rollbar
+
+This was done by adding the dependencies to the `requirements.txt`
+
+```
+rollbar
+```
+
+- Import Libraries into `app.py`
+
+```sh
+# Rollbar --------
+import rollbar
+import rollbar.contrib.flask
+from flask import got_request_exception
+```
+
+- Initialise tracing of Rollbar
+
+```sh
+# Rollbar ---------
+# Initialize tracing and an exporter that can send data to Rollerbar
+rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
+@app.before_first_request
+def init_rollbar():
+    """init rollbar module"""
+    rollbar.init(
+        # access token
+        rollbar_access_token,
+        # environment name
+        'production',
+        # server root directory, makes tracebacks prettier
+        root=os.path.dirname(os.path.realpath(__file__)),
+        # flask already sets up logging
+        allow_logging_basic_config=False)
+
+    # send exceptions from `app` to rollbar, using flask's signal system.
+    got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
+```
+
+- Create Endpoint
+
+```sh
+@app.route('/rollbar/test')
+def rollbar_test():
+    rollbar.report_message('Hello World!', 'warning')
+    return "Hello World!"
+```
+
+- Rollbar Item
+
+![image](https://user-images.githubusercontent.com/37842433/222822871-47db714d-7288-49d2-b0dd-b3d67dfe4008.png)
+
+
+- Payload Test
+
+![image](https://user-images.githubusercontent.com/37842433/222823314-a317756c-b832-472d-85d7-2700c7eb59f5.png)
+
+
+- Payload result
+
+```sh
+{
+  "body": {
+    "message": {
+      "body": "Hello World!"
+    }
+  },
+  "uuid": "00f5983f-76d8-4512-9793-43a1bcdec1f7",
+  "language": "python 3.10.10",
+  "level": "warning",
+  "timestamp": 1677875175,
+  "server": {
+    "root": "/backend-flask",
+    "host": "761bc03cbff9",
+    "pid": 27,
+    "argv": [
+      "/usr/local/lib/python3.10/site-packages/flask/__main__.py",
+      "run",
+      "--host=0.0.0.0",
+      "--port=4567"
+    ]
+  },
+  "environment": "production",
+  "framework": "flask",
+  "notifier": {
+    "version": "0.16.3",
+    "name": "pyrollbar"
+  },
+  "metadata": {
+    "customer_timestamp": 1677875174
+  }
+}
+```
 
 ---
 
 
 ### Trigger an error an observe an error with Rollbar
 
+- To trigger an error;
+  - modified the `home_activities.py` file
+  - modified the `HomeActivities` class
+  ```sh
+  # Create Span
+  from opentelemetry import trace
+  tracer = trace.get_tracer("home.activities")
+
+  class HomeActivities:
+    def run():
+      with tracer.start_as_current_span("home-activities-mock-data"): now = datetime.now(timezone.utc).astimezone()
+  ```
+  
+  - Error was then generated in Rollbar
+
+![image](https://user-images.githubusercontent.com/37842433/222825350-a60cadb8-287e-43e8-9d5d-8829624818cc.png)
+
 
 ---
 
 
 ### Install WatchTower and write a custom logger to send application log data to CloudWatch Log group
+
+- Install the Python modules for WatchTower
+
+This was done by adding the dependencies to the `requirements.txt`
+
+```
+watchtower
+```
+
+
+- Import Libraries into `app.py`
+
+```sh
+# WatchTower & Cloudwatch Logs ---------
+import watchtower
+import logging
+from time import strftime
+```
+
+
+- Logger Configuration
+
+```sh
+# Configuring Logger to Use CloudWatch
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+console_handler = logging.StreamHandler()
+cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+LOGGER.addHandler(console_handler)
+LOGGER.addHandler(cw_handler)
+LOGGER.info("some message")
+```
+
+
+- Logger Configuration for Cloudwatch Integration
+
+```sh
+# Configuring Logger to Use CloudWatch
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+console_handler = logging.StreamHandler()
+cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+LOGGER.addHandler(console_handler)
+LOGGER.addHandler(cw_handler)
+LOGGER.info("Home testing Activities")
+```
+
+
+- Set the env var in your backend-flask for `docker-compose.yml` file
+
+```sh
+      AWS_DEFAULT_REGION: "${AWS_DEFAULT_REGION}"
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+```
+
+
+- Cloudwatch Result & Log Group
+
+
+![image](https://user-images.githubusercontent.com/37842433/222923907-438df324-464b-48cb-be80-483aea893c18.png)
 
 
 ***
@@ -176,14 +399,35 @@ with tracer.start_as_current_span("home-activities-mock-data"): now = datetime.n
 
 ### Instrument Honeycomb for the frontend-application to observe network latency between frontend and backend
 
+- Install Open Telemetry packages
+
+```sh
+npm install --save \
+    @opentelemetry/api \
+    @opentelemetry/sdk-trace-web \
+    @opentelemetry/exporter-trace-otlp-http \
+    @opentelemetry/context-zone
+```
 
 ---
 
 
 ### Add custom instrumentation to Honeycomb to add more attributes
 
+- Custom span with a User ID
+
+[Commit link](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/f8c9a61a19386086f3328e2bd2c503ecd12c52a6?diff=split#diff-e7fc4f0f2b4e4510d81bbc953fe4e4198587359967fc005d49cb23f39e7f3130)
+
+![image](https://user-images.githubusercontent.com/37842433/222926608-be6c5b3d-79f7-4071-9c49-7075856b4a4f.png)
+
 
 ---
 
 
 ### Run custom queries in Honeycomb
+
+- Custom query based on `app.user_id`
+
+![image](https://user-images.githubusercontent.com/37842433/222926905-7adc392a-93f0-41ad-8b48-e0bab82ad155.png)
+
+
