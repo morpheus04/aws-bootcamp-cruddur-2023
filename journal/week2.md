@@ -10,7 +10,7 @@
   - [Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API](#configure-and-provision-x-ray-daemon-within-docker-compose-and-send-data-back-to-x-ray-api)
   - [Observe X-Ray traces within the AWS Console](#observe-x-ray-traces-within-the-aws-console)
   - [Integrate Rollbar for Error Logging](#integrate-rollbar-for-error-logging)
-  - [Trigger an error an observe an error with Rollbar](#trigger-an-error-an-observe-an-error-with-rollbar)
+  - [Trigger an error and observe an error with Rollbar](#trigger-an-error-and-observe-an-error-with-rollbar)
   - [Install WatchTower and write a custom logger to send application log data to CloudWatch Log group](#install-watchtower-and-write-a-custom-logger-to-send-application-log-data-to-cloudwatch-log-group)
 
       
@@ -34,7 +34,7 @@ HoneyComb Account create and linked to GitHub.
 
 ![image](https://user-images.githubusercontent.com/37842433/222771769-37c89cd7-e7ef-4cf2-8a92-4170af375287.png)
 
-- Each environment has a set of API keys that needs to be used for integration (via `environment variables` with e.g. Gitpod etc. Those API keys will then be used automatically whenever Gitpod is trying to send traces to Honeycomb
+- Each environment has a set of API keys that needs to be used for integration (via `environment variables`) with e.g. Gitpod etc. Those API keys will then be used automatically whenever Gitpod is trying to send traces to Honeycomb
 
 ![image](https://user-images.githubusercontent.com/37842433/222772564-77003f1f-bfef-40fa-a959-19d6f0028f6a.png)
 
@@ -302,7 +302,7 @@ def rollbar_test():
 ---
 
 
-### Trigger an error an observe an error with Rollbar
+### Trigger an error and observe an error with Rollbar
 
 - To trigger an error;
   - modified the `home_activities.py` file
