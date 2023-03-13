@@ -17,6 +17,10 @@
   
   ### Setup Cognito User Pool
   
+  - `cruddur-user-pool` User Pool was setup
+ 
+ ![image](https://user-images.githubusercontent.com/37842433/224728106-e6b89f1a-3bb5-4cd1-b8f5-fe6463b9e07a.png)
+
   
   ---
   
