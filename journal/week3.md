@@ -21,6 +21,10 @@
  
  ![image](https://user-images.githubusercontent.com/37842433/224728106-e6b89f1a-3bb5-4cd1-b8f5-fe6463b9e07a.png)
 
+  - Amplify was also configured using `env vars` in the `App.js` file. Variable used were from the `AWS Cognito User Pool`
+    - User pool ID
+    - Client ID
+    
   
   ---
   
@@ -78,3 +82,7 @@
   ---
   
   ### Verify JWT Token server side to serve authenticated API endpoints in Flask Application
+  
+  - This was implemented by creating a [cognito_jwt_token python file](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/3cec1c29746e8ba8ba9bbb39eee46b072703d602?diff=unified#diff-c4205e0c1fabfa8932a580cf9b109f3af4c9fe9c738868a9c7f8d83212db9c24) which passes the user token to the backend app whenever the user logins to perform any tasks on own page.
+  
+  - For the backend to run, the `Flask-AWSCognito` must be integrated via the [`requirements.txt`](https://github.com/morpheus04/aws-bootcamp-cruddur-2023/commit/3cec1c29746e8ba8ba9bbb39eee46b072703d602?diff=unified#diff-55d5801c5f315ed423b03e986f4ecf1d3915c097ac8c66c733f0e4cbc17cfee3) file. This will allow `AWS Cognito` utilise the backend along with the JWTs.
