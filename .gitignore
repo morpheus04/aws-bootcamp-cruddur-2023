@@ -11,3 +11,6 @@ backend-flask/services/__pycache__/notifications_activities.cpython-310.pyc
 backend-flask/services/__pycache__/search_activities.cpython-310.pyc
 backend-flask/services/__pycache__/show_activity.cpython-310.pyc
 backend-flask/services/__pycache__/user_activities.cpython-310.pyc
+backend-flask/__pycache__/app.cpython-310.pyc
+backend-flask/lib/__pycache__/db.cpython-310.pyc
+backend-flask/services/__pycache__/create_activity.cpython-310.pyc
