@@ -168,14 +168,14 @@ def data_home():
   try:
     claims = cognito_jwt_token.verify(access_token)
     # authenicatied request
-    app.logger.debug("authenicated")
+    app.logger.debug("authenticated")
     app.logger.debug(claims)
     app.logger.debug(claims['username'])
     data = HomeActivities.run(cognito_user_id=claims['username'])
   except TokenVerifyError as e:
     # unauthenicatied request
     app.logger.debug(e)
-    app.logger.debug("unauthenicated")
+    app.logger.debug("unauthenticated")
     data = HomeActivities.run()
   return data, 200
 
@@ -206,8 +206,8 @@ def data_search():
 @app.route("/api/activities", methods=['POST','OPTIONS'])
 @cross_origin()
 def data_activities():
-  user_handle  = 'andrewbrown'
-  #suser_handle = request.json["user_handle"]
+  #user_handle  = 'andrewbrown'
+  user_handle = request.json["user_handle"]
   message = request.json['message']
   ttl = request.json['ttl']
   model = CreateActivity.run(message, user_handle, ttl)
