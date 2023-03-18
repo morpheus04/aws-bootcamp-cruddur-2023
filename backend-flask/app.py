@@ -208,8 +208,8 @@ def data_search():
 def data_activities():
   #user_handle  = 'andrewbrown'
   user_handle = request.json["user_handle"]
-  message = request.json['message']
-  ttl = request.json['ttl']
+  message = request.json["message"]
+  ttl = request.json["ttl"]
   model = CreateActivity.run(message, user_handle, ttl)
   if model['errors'] is not None:
     return model['errors'], 422
