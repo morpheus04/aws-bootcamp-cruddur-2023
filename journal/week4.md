@@ -9,6 +9,7 @@
   - [Install Postgres Driver in Backend Application](#install-postgres-driver-in-backend-application)
   - [Connect Gitpod to RDS Instance](#connect-gitpod-to-rds-instance)
   - [Create Cognito Trigger to insert user into database](#create-cognito-trigger-to-insert-user-into-database)
+  - [Create new activities with a database insert](#create-cognito-trigger-to-insert-user-into-database)
 
   
   ## Required Homework
@@ -64,3 +65,12 @@
   
   
   ### Create Cognito Trigger to insert user into database
+  
+  
+  
+  ---
+  
+  
+
+
+### Create new activities with a database insert
