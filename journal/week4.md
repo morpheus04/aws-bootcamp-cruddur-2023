@@ -3,7 +3,7 @@
 #### Table of Contents
 
 + [Required Homework](#required-homework)
-  - [RDS Instance](#rds-instance)
+  - [Create RDS Postgres Instance](#create-rds-postgres-instance)
   - [Implement Security Group for RDS](#implement-security-group-for-rds)
   - [Bash scripting for common database actions](#bash-scripting-for-common-database-actions)
   - [Install Postgres Driver in Backend Application](#install-postgres-driver-in-backend-application)
@@ -16,7 +16,7 @@
   
   
   
-  ### RDS Instance
+  ### Create RDS Postgres Instance
   
 
   
