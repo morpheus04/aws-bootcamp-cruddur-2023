@@ -15,6 +15,13 @@ tasks:
       pip3 install -r requirements.txt
       cd /workspace/aws-bootcamp-cruddur-2023/frontend-react-js
       npm i
+  - name: momento
+    before: |
+      brew tap momentohq/tap
+      brew install momento-cli
+  - name: docker-compose cli
+    before: |
+      curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
   - name: postgres
     init: |
       curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
@@ -25,7 +32,7 @@ tasks:
       sudo apt-get install -y wget
     command: |
       export GITPOD_IP=$(curl ifconfig.me)
-      source  "$THEIA_WORKSPACE_ROOT/backend-flask/bin/db-update-sg-rule"
+      source  "$THEIA_WORKSPACE_ROOT/backend-flask/bin/rds/update-sg-rule"
 vscode:
   extensions:
     - cweijan.vscode-postgresql-client2
