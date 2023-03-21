@@ -1,2 +1,2 @@
-backend-flask/__pycache__/*
-backend-flask/lib/__pycache__/*
+backend-flask/__pycache__/app.*.pyc
+backend-flask/lib/__pycache__/*.pyc
