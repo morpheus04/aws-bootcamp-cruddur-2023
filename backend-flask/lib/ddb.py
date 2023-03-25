@@ -153,7 +153,6 @@ class Ddb:
         {'PutRequest': {'Item': message}}
       ]
     }
-
     try:
       print('== create_message_group.try')
       # Begin the transaction
