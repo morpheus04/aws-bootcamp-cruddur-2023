@@ -1,4 +1,4 @@
-FROM python:3.10-slim-buster
+FROM 790852294965.dkr.ecr.us-east-1.amazonaws.com/cruddur-python:3.10-slim-buster
 
 # Inside Container
 # Make a new folder Inside Container
@@ -25,7 +25,7 @@ RUN apt-get install -y gcc
 RUN apt-get install -y curl
 
 # Set Environment Variables (Env Vars)
-ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
 
 EXPOSE ${PORT}
 

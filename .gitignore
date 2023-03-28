@@ -15,3 +15,16 @@ backend-flask/services/__pycache__/create_activity.cpython-310.pyc
 backend-flask/lib/__pycache__/db.cpython-310.pyc
 backend-flask/lib/__pycache__/cognito_jwt_token.cpython-310.pyc
 backend-flask/__pycache__/app.cpython-310.pyc
+backend-flask/lib/__pycache__/cognito_jwt_token.cpython-310.pyc
+backend-flask/lib/__pycache__/db.cpython-310.pyc
+backend-flask/services/__pycache__/create_activity.cpython-310.pyc
+backend-flask/services/__pycache__/create_message.cpython-310.pyc
+backend-flask/services/__pycache__/create_reply.cpython-310.pyc
+backend-flask/services/__pycache__/home_activities.cpython-310.pyc
+backend-flask/services/__pycache__/message_groups.cpython-310.pyc
+backend-flask/services/__pycache__/messages.cpython-310.pyc
+backend-flask/services/__pycache__/notifications_activities.cpython-310.pyc
+backend-flask/services/__pycache__/search_activities.cpython-310.pyc
+backend-flask/services/__pycache__/show_activity.cpython-310.pyc
+backend-flask/services/__pycache__/user_activities.cpython-310.pyc
+backend-flask/services/__pycache__/users_short.cpython-310.pyc
