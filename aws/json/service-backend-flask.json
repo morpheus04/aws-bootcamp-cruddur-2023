@@ -4,6 +4,14 @@
     "desiredCount": 1,
     "enableECSManagedTags": true,
     "enableExecuteCommand": true,
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:790852294965:targetgroup/cruddur-backend-flask-tg/4fe1537c1187f3f1",
+            "loadBalancerName": "arn:aws:elasticloadbalancing:us-east-1:790852294965:loadbalancer/app/cruddur-alb/a6413fe17a87c5b2",
+            "containerName": "backend-flask",
+            "containerPort": 4567
+        }
+    ],
     "networkConfiguration": {
       "awsvpcConfiguration": {
         "assignPublicIp": "ENABLED",
