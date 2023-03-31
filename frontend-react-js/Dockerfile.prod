@@ -15,9 +15,7 @@ ENV REACT_APP_CLIENT_ID=$REACT_APP_CLIENT_ID
 
 COPY . ./frontend-react-js
 WORKDIR /frontend-react-js
-RUN npm install
-RUN npm install -g npm-check-updates
-RUN npm-check-updates -u
+RUN npm install -g npm@latest
 RUN npm run build
 
 # New Base Image ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
