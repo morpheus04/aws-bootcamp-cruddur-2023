@@ -27,7 +27,10 @@ services:
       AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
       AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
       AWS_COGNITO_USER_POOL_ID: "${AWS_COGNITO_USER_POOL_ID}"
-      AWS_COGNITO_USER_POOL_CLIENT_ID: "${AWS_COGNITO_USER_POOL_CLIENT_ID}"    
+      AWS_COGNITO_USER_POOL_CLIENT_ID: "${AWS_COGNITO_USER_POOL_CLIENT_ID}"
+      ECR_BACKEND_FLASK_URL: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/backend-flask"
+      ECR_FRONTEND_REACT_URL: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/frontend-react-js"
+      ECR_PYTHON_URL: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/cruddur-python"
     build: ./backend-flask
     ports:
       - "4567:4567"
