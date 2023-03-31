@@ -10,7 +10,8 @@ COPY requirements.txt requirements.txt
 
 # Inside Container
 # Install python libraries used for the app
-RUN pip3 install --upgrade pip -r requirements.txt
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
 
 # Outside Container -> Inside Container
 # Copy everything in the current directory

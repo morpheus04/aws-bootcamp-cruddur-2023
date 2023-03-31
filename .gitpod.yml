@@ -36,11 +36,12 @@ tasks:
   - name: react-js
     command: |
       cd frontend-react-js
-      npm i
+      npm install -g npm@latest
   - name: flask
     command: |
       cd backend-flask
-      pip install --upgrade pip -r requirements.txt
+      pip3 install --upgrade pip
+      pip install -r requirements.txt
   - name: fargate
     before: |
       curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
