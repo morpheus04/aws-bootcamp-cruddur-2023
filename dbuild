@@ -24,7 +24,7 @@ aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --usernam
 aws ecs execute-command  \
 --region $AWS_DEFAULT_REGION \
 --cluster cruddur \
---task 5802ad99ccb64e0db73ff6a849161de3 \
+--task 6bc8cf7f52014f699746fceedf829721 \
 --container backend-flask \
 --command "/bin/bash" \
 --interactive
