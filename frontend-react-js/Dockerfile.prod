@@ -15,7 +15,7 @@ ENV REACT_APP_CLIENT_ID=$REACT_APP_CLIENT_ID
 
 COPY . ./frontend-react-js
 WORKDIR /frontend-react-js
-RUN npm install -g npm@latest
+RUN npm install
 RUN npm run build
 
 # New Base Image ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -26,4 +26,3 @@ COPY --from=build /frontend-react-js/build /usr/share/nginx/html
 COPY --from=build /frontend-react-js/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 3000
-CMD ["nginx", "-g", "daemon off;"]
