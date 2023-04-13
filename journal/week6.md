@@ -8,7 +8,7 @@
   - [Create docker container images and push them to Elastic Container Repository](#create-docker-container-images-and-push-them-to-elastic-container-repository)
   - [Create file to provision ECS task definitions for Fargate](#create-file-to-provision-ecs-task-definitions-for-fargate)
   - [Provision Fargate services for individual apps via AWS CLI command](#provision-fargate-services-for-individual-apps-via-aws-cli-command)
-  - [Provision Security Groups, Target Groups & Application Load Balancer via the AW CLI](#provision-security-groups-target-groups--application-load-balancer-via-the-aw-cli)
+  - [Provision Security Groups, Target Groups & Application Load Balancer via the AW CLI](#provision-security-groups-target-groups--application-load-balancer-via-the-aws-cli)
   - [Connect to provisioned Fargate cluster via Sessions Manager](#connect-to-provisioned-fargate-cluster-via-sessions-manager)
 
   
@@ -42,7 +42,7 @@
   ---
   
   
-  ### Provision Security Groups, Target Groups & Application Load Balancer via the AW CLI
+  ### Provision Security Groups, Target Groups & Application Load Balancer via the AWS CLI
   
   
   ---
