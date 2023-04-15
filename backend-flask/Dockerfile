@@ -1,4 +1,4 @@
-FROM python:3.10-slim-buster
+FROM 790852294965.dkr.ecr.us-east-1.amazonaws.com/cruddur-python:3.10-slim-buster
 
 # Inside Container
 # Make a new folder Inside Container
@@ -10,6 +10,7 @@ COPY requirements.txt requirements.txt
 
 # Inside Container
 # Install python libraries used for the app
+RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 
 # Outside Container -> Inside Container
@@ -25,10 +26,10 @@ RUN apt-get install -y gcc
 RUN apt-get install -y curl
 
 # Set Environment Variables (Env Vars)
-ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
 
 EXPOSE ${PORT}
 
 # python3 -m flask run --host=0.0.0.0 --port=4567
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567", "--debug"]
 # CMD [ "./execute_flask.sh"]

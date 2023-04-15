@@ -9,9 +9,11 @@ services:
     command:
       - "xray -o -b xray-daemon:2000"
     ports:
-      - 2000:2000
+      - 2000:2000/udp
   backend-flask:
     environment:
+      DEFAULT_VPC_ID: "vpc-005e900ba57f61b54"
+      DEFAULT_SUBNET_IDS: "subnet-0992f8d6311128186,subnet-09536e032e9a26c72,subnet-0da672e1b58c855b6,subnet-0fe143e2eb63eeb68,subnet-01c4fb4e41070a54a,subnet-05a75397cee48a731"
       #AWS_ENDPOINT_URL: "http://dynamodb-local:8000"
       #CONNECTION_URL: "${PROD_CONNECTION_URL}"
       CONNECTION_URL: "postgresql://postgres:password@db:5432/cruddur"
@@ -27,7 +29,10 @@ services:
       AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
       AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
       AWS_COGNITO_USER_POOL_ID: "${AWS_COGNITO_USER_POOL_ID}"
-      AWS_COGNITO_USER_POOL_CLIENT_ID: "${AWS_COGNITO_USER_POOL_CLIENT_ID}"    
+      AWS_COGNITO_USER_POOL_CLIENT_ID: "${AWS_COGNITO_USER_POOL_CLIENT_ID}"
+      ECR_BACKEND_FLASK_URL: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/backend-flask"
+      ECR_FRONTEND_REACT_URL: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/frontend-react-js"
+      ECR_PYTHON_URL: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/cruddur-python"
     build: ./backend-flask
     ports:
       - "4567:4567"
@@ -47,7 +52,9 @@ services:
       REACT_APP_AWS_COGNITO_REGION: "${AWS_DEFAULT_REGION}"
       REACT_APP_AWS_USER_POOLS_ID: "us-east-1_l2aGnSAvu"
       REACT_APP_CLIENT_ID: "6m1aohn0bn0qsne27bdpp4qi83"
-    build: ./frontend-react-js
+    build:
+      context: ./frontend-react-js
+      dockerfile: Dockerfile.prod
     ports:
       - "3000:3000"
 # Health check for frontend (using wget)

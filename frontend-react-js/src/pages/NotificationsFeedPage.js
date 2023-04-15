@@ -9,6 +9,9 @@ import ActivityForm from '../components/ActivityForm';
 // [TODO] Authenication
 import { Auth } from 'aws-amplify';
 
+// [TODO] Authenication
+import Cookies from 'js-cookie'
+
 export default function NotificationsFeedPage() {
   const [activities, setActivities] = React.useState([]);
   const [popped, setPopped] = React.useState([]);
