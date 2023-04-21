@@ -50,9 +50,10 @@ tasks:
   - name: cdk
     before: |
       npm install aws-cdk -g
-      cd thumbing-serverless-cdk
+      cd /workspace/aws-bootcamp-cruddur-2023/thumbing-serverless-cdk
       npm install aws-cdk -g
-      # cp .env.example .env
+      npm i dotenv
+      cp .env.example .env
       npm i
 vscode:
   extensions:
