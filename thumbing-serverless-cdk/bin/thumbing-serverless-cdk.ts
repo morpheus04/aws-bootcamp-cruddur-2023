@@ -3,7 +3,6 @@ import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { ThumbingServerlessCdkStack } from '../lib/thumbing-serverless-cdk-stack';
 
-
 const app = new cdk.App();
 new ThumbingServerlessCdkStack(app, 'ThumbingServerlessCdkStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
