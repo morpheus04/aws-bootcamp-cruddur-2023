@@ -16,6 +16,7 @@ services:
       DEFAULT_SUBNET_IDS: "subnet-0992f8d6311128186,subnet-09536e032e9a26c72,subnet-0da672e1b58c855b6,subnet-0fe143e2eb63eeb68,subnet-01c4fb4e41070a54a,subnet-05a75397cee48a731"
       #AWS_ENDPOINT_URL: "http://dynamodb-local:8000"
       #CONNECTION_URL: "${PROD_CONNECTION_URL}"
+      DOMAIN_NAME: "https://deltacloudops.link"
       CONNECTION_URL: "postgresql://postgres:password@db:5432/cruddur"
       FRONTEND_URL: "https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
       BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
