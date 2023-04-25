@@ -51,7 +51,7 @@ tasks:
   - name: cdk
     before: |
       npm install aws-cdk -g
-      cd /workspace/aws-bootcamp-cruddur-2023/thumbing-serverless-cdk
+      cd $THEIA_WORKSPACE_ROOT/thumbing-serverless-cdk
       npm install aws-cdk -g
       npm i dotenv
       cp .env.example .env
