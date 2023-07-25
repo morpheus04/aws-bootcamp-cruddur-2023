@@ -28,3 +28,5 @@ backend-flask/services/__pycache__/search_activities.cpython-310.pyc
 backend-flask/services/__pycache__/show_activity.cpython-310.pyc
 backend-flask/services/__pycache__/user_activities.cpython-310.pyc
 backend-flask/services/__pycache__/users_short.cpython-310.pyc
+*.env
+node_modules
